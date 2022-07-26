@@ -39,13 +39,13 @@ async function handleMessages(topics: string[]): Promise<void> {
           template = 'new_bet_admin_report';
           break;
       }    
-      sendMail({ 
+      setTimeout(() => sendMail({ 
         to: ctxObject.email,
         from: emailAddress,
         context: ctxObject,
         subject,
         template
-       })
+       }), Math.random())
     },
   })
 }
