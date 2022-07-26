@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "moduleResolution": "node",
-    "module": "commonjs",
+    "module": "node16",
     "lib": ["es2021", "dom", "dom.iterable", "es5", "es6"],
     "sourceMap": true,
     "outDir": "dist",
@@ -18,15 +18,15 @@
     "noImplicitReturns": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "baseUrl": ".",
     "paths": {
       "@src/*": ["./src/*"],
-      "@test/*": ["./test/*"]
     },
-    "rootDirs": ["./src", "./test"],
+    "rootDirs": ["./src"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["./src/**/*.ts", "./test/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["./node_modules/*", "dist"]
 }
