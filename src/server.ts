@@ -3,7 +3,7 @@ import { kafkaConsumer } from "./kafka";
 import sendMail from "./services/mailer";
 import { emailAddress } from "../config/mailer.json"
 
-handleMessages(['new-clients', 'forgot-password'])
+handleMessages(['new-clients', 'forgot-password', 'new-pix-sent', 'new-pix-received'])
 new App().server.listen(3000, () => console.log('Listening on port 3000'));
 
 async function handleMessages(topics: string[]): Promise<void> {
@@ -27,6 +27,12 @@ async function handleMessages(topics: string[]): Promise<void> {
           subject = 'Password Recovery Token';
           template = 'recover';
           break;
+        case 'new-pix-sent':
+          subject = 'You sent a Pix'
+          template = 'new-pix-sent'
+        case 'new-pix-received':
+          template = 'new-pix-received'  
+          subject = 'You received a Pix'
       }    
       setTimeout(() => sendMail({ 
         to: ctxObject.email,
