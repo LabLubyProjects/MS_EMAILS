@@ -1,3 +1,7 @@
 node_modules
-config
-*.log
+build
+coverage
+.vscode
+.DS_STORE
+.env
+tmp
