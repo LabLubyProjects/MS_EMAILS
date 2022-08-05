@@ -2,6 +2,9 @@ import { App } from "./app";
 import { kafkaConsumer } from "./kafka";
 import sendMail from "./services/mailer";
 import { emailAddress } from "../config/mailer.json"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 handleMessages(['new-clients', 'forgot-password', 'new-pix-sent', 'new-pix-received'])
 new App().server.listen(3000, () => console.log('Listening on port 3000'));
@@ -30,9 +33,11 @@ async function handleMessages(topics: string[]): Promise<void> {
         case 'new-pix-sent':
           subject = 'You sent a Pix'
           template = 'new-pix-sent'
+          break;
         case 'new-pix-received':
           template = 'new-pix-received'  
           subject = 'You received a Pix'
+          break;
       }    
       setTimeout(() => sendMail({ 
         to: ctxObject.email,
