@@ -17,6 +17,7 @@ const readFile = promisify(fs.readFile)
 const mailer = nodemailer.createTransport({
   host, port, auth: { user, pass } 
 });
+
 const sendMail = async (params: SendMailParams): Promise<void> => {
     const html = await readFile(path.resolve('./src/resources/views/mail', `${params.template}.html`), 'utf8');
     const template = handlebars.compile(html);

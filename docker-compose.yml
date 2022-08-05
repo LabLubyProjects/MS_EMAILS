@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  emails:
+    image: ms_emails
+    container_name: emails
+    build: .
+    ports: 
+      - '3000:3000'
+    restart: on-failure
+    environment:
+      - KAFKA_CONNECTION=kafka:29092
+    networks:
+      - prova
+  
+networks:
+  prova:
+    name: prova
+    external: true
