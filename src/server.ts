@@ -1,6 +1,6 @@
 import { App } from "./app";
 import { kafkaConsumer } from "./kafka";
-import sendMail from "./services/mailer";
+import sendMail, { formatAmountToBRL } from "./services/mailer";
 import { emailAddress } from "../config/mailer.json"
 import dotenv from "dotenv"
 
@@ -31,10 +31,12 @@ async function handleMessages(topics: string[]): Promise<void> {
           template = 'recover';
           break;
         case 'new-pix-sent':
+          ctxObject.value = formatAmountToBRL(ctxObject.value)
           subject = 'You sent a Pix'
           template = 'new-pix-sent'
           break;
         case 'new-pix-received':
+          ctxObject.value = formatAmountToBRL(ctxObject.value)
           template = 'new-pix-received'  
           subject = 'You received a Pix'
           break;

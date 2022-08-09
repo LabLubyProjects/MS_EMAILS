@@ -33,5 +33,14 @@ const sendMail = async (params: SendMailParams): Promise<void> => {
     });
 };
 
+export function formatAmountToBRL(amount: number) {
+  let formattedNumber = `R$ ${amount}`.replace('.', ',');
+  if(formattedNumber.indexOf(',') === -1)
+    formattedNumber += ',00'; 
+  else if(formattedNumber.split(',')[1].length === 1)
+    formattedNumber += '0';
+  return formattedNumber;
+}
+
 export default sendMail;
 
